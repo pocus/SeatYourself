@@ -1,2 +1,18 @@
 <h1>Reservations#index</h1>
 <p>Find me in app/views/reservations/index.html.erb</p>
+
+
+<% @reservations.each do |r| %>
+<ul>
+	<li><%= r.user_id %></li>
+	<li><%= r.guest_qty %> people</li>
+	<li><%= User.find_by(id: r.user_id).name %></li>
+	<li><%= r.restaurant_id %> restaurant id</li> 
+	<li><%= link_to "delete", reservation_path(r), :method => :delete %></li>
+</ul>
+
+<% end %>
+
+
+Seats occupied
+<%= @seats_occupied %>
