@@ -18,7 +18,7 @@ class ReservationsController < ApplicationController
 
   def create
     @my_reso = Reservation.new(reservation_params)
-    if check_avail(@my_reso) == true
+    if  @my_reso.valid? && check_avail(@my_reso) == true
       @my_reso.save
        flash[:alert] = "Congrats! You created a new reservation. You are amazing!"
       redirect_to reservations_path
