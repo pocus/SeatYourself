@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
-  
+
   def index
-    @reservations = Reservation.all 
+    @reservations = Reservation.all
     # @seats_occupied_at_hour = seats_occupied_at_hour
   end
 
@@ -20,10 +20,12 @@ class ReservationsController < ApplicationController
     @my_reso = Reservation.new(reservation_params)
     if check_avail(@my_reso) == true
       @my_reso.save
+       flash[:alert] = "Congrats! You created a new reservation. You are amazing!"
       redirect_to reservations_path
     else
+      flash[:alert] = "There are no seats available at that time. Please select a different time."
       render :new
-    end 
+    end
   end
 
   def update
@@ -35,16 +37,13 @@ class ReservationsController < ApplicationController
     redirect_to reservations_path
   end
 
-  
+
   def check_avail(candidate_reservation)
       candidate_reservation.guest_qty < (Restaurant.find_by(id: 1).totalseats - seats_occupied_at_hour)
   end
 
 
-
-
-
-  private 
+  private
   def reservation_params
     params.require(:reservation).permit(:guest_qty, :date, :hour, :restaurant_id, :user_id)
   end
