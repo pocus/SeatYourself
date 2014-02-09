@@ -7,12 +7,13 @@
 	<li><%= r.user_id %></li>
 	<li><%= r.guest_qty %> people</li>
 	<li><%= User.find_by(id: r.user_id).name %></li>
-	<li><%= r.restaurant_id %> restaurant id</li> 
+	<li><%= r.restaurant_id %> restaurant id</li>
+	<li><%= r.hour %> o'clock </li> 
 	<li><%= link_to "delete", reservation_path(r), :method => :delete %></li>
 </ul>
 
 <% end %>
 
 
-Seats occupied
-<%= @seats_occupied %>
+Seats occupied at hour:
+<%= @seats_occupied_at_hour %>

@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
   
   def index
     @reservations = Reservation.all 
-    @seats_occupied = seats_occupied
+    # @seats_occupied_at_hour = seats_occupied_at_hour
   end
 
   def edit
@@ -37,12 +37,16 @@ class ReservationsController < ApplicationController
 
   
   def check_avail(candidate_reservation)
-    candidate_reservation.guest_qty < (Restaurant.find_by(id: 1).totalseats - seats_occupied)
+      candidate_reservation.guest_qty < (Restaurant.find_by(id: 1).totalseats - seats_occupied_at_hour)
   end
+
+
+
+
 
   private 
   def reservation_params
-    params.require(:reservation).permit(:guest_qty, :date,:time, :restaurant_id, :user_id)
+    params.require(:reservation).permit(:guest_qty, :date, :hour, :restaurant_id, :user_id)
   end
 
 end
