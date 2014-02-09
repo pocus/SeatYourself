@@ -2,10 +2,20 @@ class ReservationsController < ApplicationController
 
   def index
     @reservations = Reservation.all
-    # @seats_occupied_at_hour = seats_occupied_at_hour
+    # @seats_occupied = seats_occupied
   end
 
   def edit
+    @my_reso = Reservation.find(params[:id])
+  end
+
+  def update
+    @my_reso = Reservation.find(params[:id])
+    if @my_reso.update_attributes(reservation_params)
+      redirect_to reservations_path
+    else
+      render :edit
+    end
   end
 
   def new
@@ -14,6 +24,7 @@ class ReservationsController < ApplicationController
   end
 
   def show
+    @my_reso = Reservation.find(params[:id])
   end
 
   def create
@@ -33,8 +44,7 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def update
-  end
+
 
   def destroy
     my_reso = Reservation.find(params[:id])
@@ -43,16 +53,18 @@ class ReservationsController < ApplicationController
   end
 
   def check_avail(candidate_reservation)
-      candidate_reservation.guest_qty <= (Restaurant.find_by(id: 1).totalseats - seats_occupied_at_hour)
+      candidate_reservation.guest_qty <= (Restaurant.find_by(id: 1).totalseats - seats_occupied)
   end
 
-  def seats_occupied_at_hour
+  def seats_occupied
     @reservations = Reservation.all
      # candidate_restaurant_reservations = @reservations.where("restaurant_id='1'") #later make this restaurant_id
-     candidate_restaurant_reservations = @reservations.where("hour = ? AND restaurant_id = ?", params[:reservation][:hour], params[:reservation][:restaurant_id])
+     # candidate_restaurant_reservations = @reservations.where("date = ?", params[:reservation][:date])
+     candidate_restaurant_reservations = @reservations.where("hour = ? AND date = ? AND restaurant_id = ?", params[:reservation][:hour], params[:reservation][:date], params[:reservation][:restaurant_id])
+
      result = 0
      candidate_restaurant_reservations.each do |c|
-      result = c.guest_qty + result
+     result = c.guest_qty + result
     end
     result
   end

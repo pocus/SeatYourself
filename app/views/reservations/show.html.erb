@@ -1,2 +1,15 @@
 <h1>Reservations#show</h1>
-<p>Find me in app/views/reservations/show.html.erb</p>
+
+
+<ul>
+	<li>userid:<%= @my_reso.user_id %></li>
+	<li>booked by: <%= User.find_by(id:@my_reso.user_id).name %></li>
+	<li>restaurant_id: <%=@my_reso.restaurant_id %></li>
+	<li>resto name: <%= Restaurant.find_by(id:@my_reso.restaurant_id).name %></li>
+	<li>** <%=@my_reso.guest_qty %> people </li>
+	<li>** <%=@my_reso.hour %> o'clock </li>
+	<li><%=@my_reso.date %></li>
+	<li><%= link_to "delete", reservation_path, confirm: "Are you sure?", :method => :delete %></li><%= link_to "edit", edit_reservation_path %>
+</ul>
+
+

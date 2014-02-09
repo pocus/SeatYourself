@@ -1,33 +1,4 @@
 <h1>Reservations#new</h1>
 
-<p>Find me in app/views/reservations/new.html.erb</p>
+<%= render "form" %>
 
-<%= form_for @my_reso do |f| %>
-<p>
-<%= f.label :user_id %><br>
-<%= f.text_field :user_id %>
-</p>
-
-<p>
-<%= f.label :restaurant_id %><br>
-<%= f.text_field :restaurant_id %>
-</p>
-
-<p>
-<%= f.label :guest_qty %><br>
-<%= f.text_field :guest_qty %>
-</p>
-
-<p>
-<%= f.label :date %><br>
-<%= f.date_field :date %>
-</p>
-
-<p>
-<%= f.label :hour %><br>
-<%= f.text_field :hour %>
-</p>
-<p>
-<%= f.submit %>
-</p>
-<% end %>

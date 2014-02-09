@@ -10,9 +10,11 @@
 	<li>** <%= r.hour %> o'clock </li>
 	<li><%= r.date %></li>
 	<li><%= link_to "delete", reservation_path(r), :method => :delete %></li>
+	<li><%= link_to "edit", edit_reservation_path(r) %></li>
+	<li><%= link_to "show", reservation_path(r) %></li>
 </ul>
 
 <% end %>
 
 Seats occupied at hour:
-<%= @seats_occupied_at_hour %>
+<%= @seats_occupied %>
