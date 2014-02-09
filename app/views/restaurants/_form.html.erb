@@ -1,0 +1,52 @@
+
+
+
+<%= form_for @restaurant do |f| %>
+
+<p>
+<%= f.label :name %><br>
+<%= f.text_field :name %>
+</p>
+
+<p>
+<%= f.label :address %><br>
+<%= f.text_field :address %>
+</p>
+
+<p>
+<%= f.label :totalseats %><br>
+<%= f.text_field :totalseats %>
+</p>
+<p>
+<%= f.label :pricerange %><br>
+<%= f.text_field :pricerange %>
+</p>
+
+<p>
+<%= f.label :timeopening %><br>
+<%= f.text_field :timeopening %>
+</p>
+
+<p>
+<%= f.label :timeclosing %><br>
+<%= f.text_field :timeclosing %>
+</p>
+
+<p>
+<%= f.label :menu %><br>
+<%= f.text_field :menu %>
+</p>
+
+<p>
+<%= f.label :category %><br>
+<%= f.text_field :category %>
+</p>
+<p>
+<%= f.label :description %><br>
+<%= f.text_field :description %>
+</p>
+
+<p>
+<%= f.submit %>
+</p>
+<% end %>
