@@ -1,19 +1,18 @@
-<h1>Reservations#index</h1>
-<p>Find me in app/views/reservations/index.html.erb</p>
-
+<h1>All reservations</h1>
 
 <% @reservations.each do |r| %>
 <ul>
-	<li><%= r.user_id %></li>
-	<li><%= r.guest_qty %> people</li>
-	<li><%= User.find_by(id: r.user_id).name %></li>
-	<li><%= r.restaurant_id %> restaurant id</li>
-	<li><%= r.hour %> o'clock </li> 
+	<li>userid:<%= r.user_id %></li>
+	<li>booked by: <%= User.find_by(id: r.user_id).name %></li>
+	<li>restaurant_id: <%= r.restaurant_id %></li>
+	<li>resto name: <%= Restaurant.find_by(id: r.restaurant_id).name %></li>
+	<li>** <%= r.guest_qty %> people </li>
+	<li>** <%= r.hour %> o'clock </li>
+	<li><%= r.date %></li>
 	<li><%= link_to "delete", reservation_path(r), :method => :delete %></li>
 </ul>
 
 <% end %>
-
 
 Seats occupied at hour:
 <%= @seats_occupied_at_hour %>

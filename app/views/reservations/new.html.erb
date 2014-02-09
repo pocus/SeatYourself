@@ -3,23 +3,31 @@
 <p>Find me in app/views/reservations/new.html.erb</p>
 
 <%= form_for @my_reso do |f| %>
-
-<%= f.label :user_id %>
+<p>
+<%= f.label :user_id %><br>
 <%= f.text_field :user_id %>
+</p>
 
-<%= f.label :restaurant_id %>
+<p>
+<%= f.label :restaurant_id %><br>
 <%= f.text_field :restaurant_id %>
+</p>
 
-<%= f.label :guest_qty %>
+<p>
+<%= f.label :guest_qty %><br>
 <%= f.text_field :guest_qty %>
+</p>
 
-<%= f.label :date %>
+<p>
+<%= f.label :date %><br>
 <%= f.date_field :date %>
+</p>
 
-<%= f.label :hour %>
+<p>
+<%= f.label :hour %><br>
 <%= f.text_field :hour %>
-
-
+</p>
+<p>
 <%= f.submit %>
-
+</p>
 <% end %>

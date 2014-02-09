@@ -18,13 +18,18 @@ class ReservationsController < ApplicationController
 
   def create
     @my_reso = Reservation.new(reservation_params)
-    if  @my_reso.valid? && check_avail(@my_reso) == true
-      @my_reso.save
-       flash[:alert] = "Congrats! You created a new reservation. You are amazing!"
-      redirect_to reservations_path
+    if  @my_reso.valid? == true
+      if check_avail(@my_reso) == true
+        @my_reso.save
+        flash[:alert] = "Congrats! You created a new reservation. You are amazing!"
+        redirect_to reservations_path
+      else
+        flash[:alert] = "There are no seats available at that time. Please select a different time."
+        render :new
+      end
     else
-      flash[:alert] = "There are no seats available at that time. Please select a different time."
-      render :new
+       flash[:alert] = "Invalid entry"
+       render :new
     end
   end
 
@@ -37,11 +42,20 @@ class ReservationsController < ApplicationController
     redirect_to reservations_path
   end
 
-
   def check_avail(candidate_reservation)
-      candidate_reservation.guest_qty < (Restaurant.find_by(id: 1).totalseats - seats_occupied_at_hour)
+      candidate_reservation.guest_qty <= (Restaurant.find_by(id: 1).totalseats - seats_occupied_at_hour)
   end
 
+  def seats_occupied_at_hour
+    @reservations = Reservation.all
+     # candidate_restaurant_reservations = @reservations.where("restaurant_id='1'") #later make this restaurant_id
+     candidate_restaurant_reservations = @reservations.where("hour = ? AND restaurant_id = ?", params[:reservation][:hour], params[:reservation][:restaurant_id])
+     result = 0
+     candidate_restaurant_reservations.each do |c|
+      result = c.guest_qty + result
+    end
+    result
+  end
 
   private
   def reservation_params
