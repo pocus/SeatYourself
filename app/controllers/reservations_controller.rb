@@ -1,15 +1,13 @@
 class ReservationsController < ApplicationController
 
   def index
-
-    if params[:restaurant_id] != nil  #if this exists
-      @reservations = Reservation.where("restaurant_id = ?", params[:restaurant_id])
-      # @seats_occupied = seats_occupied
-    else #params is nothing
-      @reservations = Reservation.all
+      if params[:restaurant_id] != nil  #if this exists
+        @reservations = Reservation.where("restaurant_id = ?", params[:restaurant_id])
+        # @seats_occupied = seats_occupied
+      else #params is nothing
+        @reservations = Reservation.all
+      end
     end
-
-  end
 
   def edit
     @my_reso = Reservation.find(params[:id])

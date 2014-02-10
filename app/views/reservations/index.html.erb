@@ -5,6 +5,7 @@
 	<li>userid:<%= r.user_id %></li>
 	<li>booked by: <%= User.find_by(id: r.user_id).name %></li>
 	<li>restaurant_id: <%= r.restaurant_id %></li>
+	<li>resto name: <%= Restaurant.find_by(id: r.restaurant_id).name %></li>
 	<li>** <%= r.guest_qty %> people </li>
 	<li>** <%= r.hour %> o'clock </li>
 	<li><%= r.date %></li>
