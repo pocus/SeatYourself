@@ -24,7 +24,8 @@ class ReservationsController < ApplicationController
 
   def new
     # @user = User.find_by(user_id)
-    @my_reso = Reservation.new
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @my_reso = @restaurant.reservations.new
   end
 
   def show
@@ -33,7 +34,7 @@ class ReservationsController < ApplicationController
 
   def create
     @my_reso = Reservation.new(reservation_params)
-
+    @my_reso.restaurant_id = params[:restaurant_id]
 
     if  @my_reso.valid? == true
       if check_avail(@my_reso) == true
