@@ -35,6 +35,8 @@ class ReservationsController < ApplicationController
 
   def create
     @my_reso = Reservation.new(reservation_params)
+
+
     if  @my_reso.valid? == true
       if check_avail(@my_reso) == true
         @my_reso.save
@@ -49,8 +51,6 @@ class ReservationsController < ApplicationController
        render :new
     end
   end
-
-
 
   def destroy
     my_reso = Reservation.find(params[:id])
