@@ -7,7 +7,7 @@
 	<li>restaurant_id: <%=@my_reso.restaurant_id %></li>
 	<li>resto name: <%= Restaurant.find_by(id:@my_reso.restaurant_id).name %></li>
 	<li>** <%=@my_reso.guest_qty %> people </li>
-	<li>** <%=@my_reso.hour %> o'clock </li>
+	<li>** <%=to_12h @my_reso.hour %></li>
 	<li><%=@my_reso.date %></li>
 	<li><%= link_to "delete", reservation_path, confirm: "Are you sure?", :method => :delete %></li><%= link_to "edit", edit_reservation_path %>
 </ul>

@@ -7,7 +7,7 @@
 	<li>restaurant_id: <%= r.restaurant_id %></li>
 	<li>resto name: <%= Restaurant.find_by(id: r.restaurant_id).name %></li>
 	<li>** <%= r.guest_qty %> people </li>
-	<li>** <%= r.hour %> o'clock </li>
+	<li>** <%= to_12h r.hour %></li>
 	<li><%= r.date %></li>
 	<li><%= link_to "delete", reservation_path(r), :method => :delete %></li>
 	<li><%= link_to "edit", edit_reservation_path(r) %></li>
@@ -15,6 +15,3 @@
 </ul>
 
 <% end %>
-
-Seats occupied at hour:
-<%= @seats_occupied %>
