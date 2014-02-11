@@ -1,13 +1,13 @@
 <h1>Users#show</h1>
 
 <h3>User Info</h3>
-<h4><%= @user.name %></h4>
+<h4><%= current_user.name %></h4>
 <ul>
-	<li><%= @user.phone %></li>
-	<li><%= @user.email %></li>
+	<li><%= current_user.phone %></li>
+	<li><%= current_user.email %></li>
 
 </ul>
-<% @user.reservations.where("date >= ?", Date.today).order(date: :asc).each do |r| %>
+<% current_user.reservations.where("date >= ?", Date.today).order(date: :asc).each do |r| %>
 <div>
 	<%= r.restaurant.name %>
 	<ul>

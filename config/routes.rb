@@ -2,7 +2,9 @@ SeatYoSelf::Application.routes.draw do
 
   resources :sessions
   resources :reservations, :except => [:new, :create]
+  get 'users/current' => 'users#current'
   resources :users
+
 
   resources :restaurants do
       resources :reservations

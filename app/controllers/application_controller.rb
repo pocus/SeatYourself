@@ -19,6 +19,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ensure_logged_in
+    unless current_user
+      flash[:alert] = "Please log in"
+      redirect_to new_session_path
+    end
+  end
+
+  def ensure_logged_in_admin
+    unless current_user.admin
+      flash[:alert] = "Please log in"
+      redirect_to new_session_path
+    end
+  end
+
+
+
   helper_method :to_12h
 
 end
