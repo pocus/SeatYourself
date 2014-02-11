@@ -1,2 +1,17 @@
 <h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+
+<h3>User Info</h3>
+<h4><%= @user.name %></h4>
+<ul>
+	<li><%= @user.phone %></li>
+	<li><%= @user.email %></li>
+</ul>
+<% @user.reservations.where("date >= ?", Date.today).order(date: :asc).each do |r| %>
+<div>
+	<%= r.restaurant.name %>
+	<ul>
+	<li><%= r.date.to_formatted_s(:long_ordinal) %></li>
+	<li>Time: <%= r.hour %> o'clock</li> 
+	</ul>
+</div>
+<% end %>
