@@ -11,7 +11,8 @@
 	<%= r.restaurant.name %>
 	<ul>
 	<li><%= r.date.to_formatted_s(:long_ordinal) %></li>
-	<li>Time: <%= r.hour %> o'clock</li> 
+	<li>Time: <%= to_12h r.hour %></li> 
+	<li><%= link_to "Delete", r, method: :delete %></li>
 	</ul>
 </div>
 <% end %>

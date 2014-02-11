@@ -10,4 +10,15 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :current_user
+
+  def to_12h(hour)
+    if hour > 12
+      "#{hour - 12} p.m."
+    else
+      "#{hour} a.m."
+    end
+  end
+
+  helper_method :to_12h
+
 end
