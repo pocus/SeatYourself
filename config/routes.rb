@@ -1,5 +1,6 @@
 SeatYoSelf::Application.routes.draw do
 
+  resources :sessions
   resources :reservations, :except => [:new, :create]
   resources :users
 
