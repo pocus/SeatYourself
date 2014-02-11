@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
   def to_12h(hour)
     if hour > 12
       "#{hour - 12} p.m."
+    elsif hour == 12
+      "#{hour} p.m." 
     else
       "#{hour} a.m."
     end

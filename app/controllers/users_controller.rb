@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :ensure_logged_in, only: [:show]
+  before_action :ensure_logged_in, only: [:show, :current]
 
   def index
   end

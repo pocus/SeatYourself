@@ -15,8 +15,9 @@
 </p>
 
 <p>
-<%= f.label :hour %><br>
-<%= f.text_field :hour %>
+<% hour_array = (@restaurant.timeopening...@restaurant.timeclosing).to_a.map { |t| [to_12h(t), t] }%>
+<%= f.label :hour %>
+<%= f.select :hour, hour_array %>
 </p>
 <p>
 <%= f.submit %>
