@@ -44,7 +44,9 @@
 
     <!-- Left Nav Section -->
     <ul class="left">
-      <li><%= link_to "See all restaurants", restaurants_path %></li>
+      <% if current_user %>
+      <li><%= link_to "My bookings", user_path(current_user.id) %></li>
+      <% end %>
     </ul>
   </section>
   </nav>

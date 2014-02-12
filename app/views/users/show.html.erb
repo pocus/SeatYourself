@@ -1,19 +1,41 @@
-<h1>Users#show</h1>
+<div class = "row">
+	<div class="large-12 columns">
+		<h1>Hi <%= @user.name %>!</h1>
+	</div>
+</div>
 
-<h3>User Info</h3>
-<h4><%= @user.name %></h4>
-<ul>
-	<li><%= @user.phone %></li>
-	<li><%= @user.email %></li>
+<div class = "row">
+	<div class="large-1 columns"></div>
+	<div class="large-11 columns">
+		<ul>
+			<li><%= @user.phone %></li>
+			<li><%= @user.email %></li>
+		</ul>
+	</div>
+</div>
 
-</ul>
+<div class = "row">
+	<div class="large-12 columns">
+		<h1 class = "subheader">Your reservations</h1>
+	</div>
+</div>
+
 <% @user.reservations.where("date >= ?", Date.today).order(date: :asc).each do |r| %>
-<div>
-	<%= r.restaurant.name %>
-	<ul>
-	<li><%= r.date.to_formatted_s(:long_ordinal) %></li>
-	<li>Time: <%= to_12h r.hour %></li> 
-	<li><%= link_to "Delete", r, method: :delete %></li>
-	</ul>
+	<div class = "row">
+		<div class="large-12 columns">
+			<h4 class = "subheader"><%= link_to r.restaurant.name, restaurant_path(r.restaurant_id) %></h4>
+		</div>
+	</div>
+
+<div class = "row">
+	<div class="large-1 columns"></div>
+	<div class="large-11 columns">
+		<ul>
+			<li><%= r.date.to_formatted_s(:long_ordinal) %></li>
+			<li>Time: <%= to_12h r.hour %></li>
+			<li><%= link_to "Delete", r, method: :delete %> | <%= link_to "Edit", edit_user_reservation_path(@user.id, r.id)  %></li>
+		</ul>
+</div>
 </div>
 <% end %>
+
