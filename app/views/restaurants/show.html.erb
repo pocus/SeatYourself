@@ -1,11 +1,16 @@
-<h1>Restaurants#show</h1>
+<h1><%= @restaurant.name %></h1>
 
-<p>
-<ul>
-<li><%= @restaurant.name %>
-<li><%= @restaurant.address %>
-<li><%= @restaurant.description %>
-</ul>
-</p>
+<div class = "row">
+	<div class="large-1 columns"></div>
+	<div class="large-11 columns">
+		<ul>
+			<li><%= @restaurant.address %>
+			<li><%= @restaurant.description %>
+		</ul>
+	</div>
+</div>
 
-<p><%= link_to "make a reservation here", new_restaurant_reservation_path(@restaurant) %></p>
+<div class = "row">
+	<div class="large-12 columns"><%= link_to "Reserve this restaurant!", new_restaurant_reservation_path(@restaurant), class: "button radius" %>
+	</div>
+</div>

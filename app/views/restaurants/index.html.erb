@@ -3,20 +3,22 @@
 <h2>All restaurants</h2>
 
 <% @restaurants.each do |r| %>
-<ul>
-	<li>restaurant:<%= r.id %></li>
-	<li>resto name:<%= r.name %></li>
-	<li>time opening: <%= r.timeopening %></li>
-	<li>time closing: <%= r.timeclosing %></li>
-	<li>price range: <%= r.pricerange %></li>
-	<li>category: <%= r.category %></li>
-	<li>description: <%= r.description %></li>
-	<li><%= link_to "delete", restaurant_path(r), :method => :delete %></li>
-	<li><%= link_to "edit", edit_restaurant_path(r) %></li>
-	<li><%= link_to "show", restaurant_path(r) %></li>
-</ul>
-
+<div class = "row">
+	<div class="large-12 columns">
+		<h3 class ="subheader" >resto name: <%= link_to r.name, restaurant_path(r) %></h3>
+	</div>
+</div>
+<div class = "row">
+	<div class = "large-1 columns"></div>
+	<div class="large-11 columns">
+	<ul>
+		<li>restaurant id: <%= r.id %></li>
+		<li>opening hours: <%= r.timeopening %> til <%= r.timeclosing %> </li>
+		<li>price range: <%= r.pricerange %></li>
+		<li>category: <%= r.category %></li>
+		<li>description: <%= r.description %></li>
+		<li><%= link_to "delete", restaurant_path(r), :method => :delete %> | <%= link_to "edit", edit_restaurant_path(r) %></li>
+	</ul>
+</div>
+</div>
 <% end %>
-
-Seats occupied at hour:
-<%= @seats_occupied %>

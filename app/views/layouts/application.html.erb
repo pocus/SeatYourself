@@ -1,34 +1,77 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>SeatYoSelf</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<div class="header"> 
-<p>
-	<% if current_user %>
-		<%= link_to "log out", session_path("foo"), :method => :delete %> 
-	<% else %>
-		<%= link_to "log in", new_session_path %> | <%= link_to "sign up", new_user_path %>
-	<% end %> | <%= link_to "reservation index", reservations_path %>
-	</p>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+  	<meta charset="utf-8" />
+
+  	<!-- Uncomment to make IE8 render like IE7 -->
+  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+
+  	<!-- Set the viewport width to device width for mobile -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  	<title><%= content_for?(:title) ? yield(:title) : "SeatYoSelf" %></title>
+
+  	<%= stylesheet_link_tag    "application" %>
+  	<%= javascript_include_tag "vendor/custom.modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+  <nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class = "divider"></li>
+    <li class="name">
+      <h1><%= link_to "Seat Yourself", restaurants_path %></h1>
+    </li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class= "right">
+      <% if current_user %>
+        <li class = "has-form" ><%= link_to "Log out '#{current_user.name}'", session_path("foo"), :method => :delete, class: "button" %>
+      <% else %>
+        <li class = "has-form"><%= link_to "Log in", new_session_path, class: "button" %> </li>
+        <li class = "has-form"><%= link_to "Sign up", new_user_path, class: "button" %></li>
+      <% end %>
+    </ul>
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><%= link_to "See all restaurants", restaurants_path %></li>
+    </ul>
+  </section>
+  </nav>
+
+    <% if flash[:notice] %>
+    <div data-alert class ="alert-box radius" >
+      <%= flash[:notice] %>
+    </div>
+    <% end %>
 
 
+    <% if flash[:alert] %>
+    <div data-alert class ="alert-box radius" >
+      <%= flash[:alert] %>
+    </div>
+    <% end %>
 
-<div class ="flash" >
-	<% if flash[:notice] %>
-		<p id ="notice"><%= flash[:notice] %></p>
-	<% end %>
+    <div class = "row">
+      <div class = "large-8 columns"> <%= yield %> </div>
+      <div class = "large-4 columns">
+        <h2 class="subheader"  >Welcome to SeatYourself!</h2>
+        <p>
+          We code, you eat.
+        </p>
+      </div>
+    </div>
 
-	<% if flash[:alert] %>
-		<p id ="alert"> <%= flash[:alert] %></p>
-	<% end %>
-</div>
-
-<%= yield %>
-
-</body>
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>
