@@ -1,5 +1,7 @@
 == README
 
-SeatYourself - Bitmaker Labs
+SeatYourself
 
 Working with time, date, and models to create a restaurant booking app. Supports multiple users and restaurants.
+
+With contributions from @bshain, @jennaquint, @pocus, and @countercheck - Bitmaker Labs Cohort 5.
