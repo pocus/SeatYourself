@@ -1,4 +1,5 @@
 class ReservationsController < ApplicationController
+  before_action :ensure_logged_in
 
   def index
       if params[:restaurant_id] != nil  #if this exists
@@ -26,6 +27,7 @@ class ReservationsController < ApplicationController
     # @user = User.find_by(user_id)
     @restaurant = Restaurant.find(params[:restaurant_id])
     @my_reso = @restaurant.reservations.new
+
   end
 
   def show
@@ -35,8 +37,9 @@ class ReservationsController < ApplicationController
   def create
 
     @restaurant = Restaurant.find(params[:restaurant_id])
-    @my_reso = @restaurant.reservations.build(reservation_params)
 
+    @my_reso = @restaurant.reservations.build(reservation_params)
+    @my_reso.user_id = @current_user.id
     # @my_reso = Reservation.new(reservation_params)
     # @my_reso.restaurant_id = params[:restaurant_id]
 
@@ -61,11 +64,11 @@ class ReservationsController < ApplicationController
 
   # def seats_occupied
   #   @reservations = Reservation.all
-    
+
   #   reserv = params[:reservation]
   #   @restaurant.reservations.where(hour: reserv[:hour], date: reserv[:date]).sum(:guest_qty)
 
-    
+
   #   # candidate_restaurant_reservations = @reservations.where("hour = ? AND date = ?", params[:reservation][:hour], params[:reservation][:date], params[:reservation])
 
   #   # result = 0
