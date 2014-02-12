@@ -47,7 +47,6 @@ class ReservationsController < ApplicationController
       flash[:alert] = "Congrats! You created a new reservation. You are amazing!"
       redirect_to reservations_path
     else
-      flash[:alert] = "Something went wrong with your reservation, please try again"
       render :new
     end
   end
@@ -82,5 +81,4 @@ class ReservationsController < ApplicationController
   def reservation_params
     params.require(:reservation).permit(:guest_qty, :date, :hour, :restaurant_id, :user_id)
   end
-
 end

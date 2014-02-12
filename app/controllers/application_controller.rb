@@ -11,32 +11,22 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  def ensure_logged_in
+    unless current_user
+      flash[:alert] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
+
   def to_12h(hour)
     if hour > 12
       "#{hour - 12} p.m."
     elsif hour == 12
-      "#{hour} p.m." 
+      "#{hour} p.m."
     else
       "#{hour} a.m."
     end
   end
-
-  def ensure_logged_in
-    unless current_user
-      flash[:alert] = "Please log in"
-      redirect_to new_session_path
-    end
-  end
-
-  def ensure_logged_in_admin
-    unless current_user.admin
-      flash[:alert] = "Please log in"
-      redirect_to new_session_path
-    end
-  end
-
-
-
   helper_method :to_12h
 
 end

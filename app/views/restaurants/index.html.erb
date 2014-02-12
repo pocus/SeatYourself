@@ -5,14 +5,13 @@
 <% @restaurants.each do |r| %>
 <div class = "row">
 	<div class="large-12 columns">
-		<h3 class ="subheader" >resto name: <%= link_to r.name, restaurant_path(r) %></h3>
+		<h3 class ="subheader" ><%= link_to r.name, restaurant_path(r) %></h3>
 	</div>
 </div>
 <div class = "row">
 	<div class = "large-1 columns"></div>
 	<div class="large-11 columns">
 	<ul>
-		<li>restaurant id: <%= r.id %></li>
 		<li>opening hours: <%= r.timeopening %> til <%= r.timeclosing %> </li>
 		<li>price range: <%= r.pricerange %></li>
 		<li>category: <%= r.category %></li>

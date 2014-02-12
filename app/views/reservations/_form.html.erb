@@ -1,35 +1,43 @@
+<% if @my_reso.errors.any? %>
+		<p><%= pluralize(@my_reso.errors.count, "error") %> prevented this reservation from being created:</p>
+		<ul>
+			<% @my_reso.errors.full_messages.each do |msg| %>
+				<div class="alert-box alert round"><li><%=msg%></li></div>
+				<% end %>
+		</ul>
+<% end %>
+
 <%= form_for [@restaurant, @my_reso] do |f| %>
 
 <p>
-<%= f.label :guest_qty %><br>
-<%= f.text_field :guest_qty %>
-</p>
 
-<p>
-<%= f.label :date %><br>
-<%= f.date_field :date %>
-</p>
-
-<p>
-<% hour_array = (@restaurant.timeopening...@restaurant.timeclosing).to_a.map { |t| [to_12h(t), t] }%>
-<%= f.label :hour %>
-<%= f.select :hour, hour_array %>
-</p>
-<p>
-<%= f.submit %>
-</p
-<% end %>
-
-<% if @my_reso.errors.any? %>
-	<div id='error_messages'>
-		<h2><%= pluralize(@my_reso.errors.count, "error") %> prevent this product from being saved:</h2>
-
-		<ul>
-			<% @my_reso.errors.full_messages.each do |msg| %>
-				<li><%= msg %></li>
-				<% end %>
-		</ul>
+<div class = "row">
+	<div class="large-4 columns">
+		<% guest_array = (1..@restaurant.totalseats).to_a.map { |s| [s, s] }%>
+		<%= f.label :guest_qty %><br>
+		<%= f.select :guest_qty, guest_array %>
 	</div>
+
+	<div class="large-4 columns">
+		<%= f.label :date %><br>
+		<%= f.date_field :date %>
+	</div>
+
+	<div class="large-4 columns">
+		<% hour_array = (@restaurant.timeopening...@restaurant.timeclosing).to_a.map { |t| [to_12h(t), t] }%>
+		<%= f.label :hour %><br>
+		<%= f.select :hour, hour_array %>
+	</div>
+</div>
+
+<div class = "row">
+	<div class="large-12 columns">
+		<%= f.submit :class => 'small radius success button'  %>
+	</div>
+</div>
+
 <% end %>
+
+
 
 <!-- Can we adjust date and time for our time zone? -->

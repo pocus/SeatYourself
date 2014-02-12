@@ -23,8 +23,7 @@ class Reservation < ActiveRecord::Base
 
   def availability
     if guest_qty > (restaurant.totalseats - restaurant.seats_occupied(self))
-      errors.add(:base, "Sorry, the restaurant cannot handle your party size")
+      errors.add(:base, "Sorry, the restaurant cannot handle your party size.")
     end
   end
 end
-
